@@ -5,16 +5,16 @@ Wee.fn.make('easySlide', {
 				elementRef: 'galleryImage',
 				enableSwipe: true,
 				resizeParent: false,
-				trackerRef: false
+				trackerRef: false,
+				thumbs: false
 			}, options);
 
 		this.$elements = $('ref:' + conf.elementRef);
 		this.$arrows = $('ref:' + conf.arrows);
-		this.resizeParent = conf.resizeParent;
 		this.index = 0;
 
-		if (this.resizeParent) {
-			this.$elements.parent().height(this.$elements.first().height());
+		if (conf.thumbs) {
+			this.$thumbs = $('ref:' + conf.thumbs);
 		}
 
 		this.bind();
@@ -29,7 +29,8 @@ Wee.fn.make('easySlide', {
 	},
 
 	cycle: function(index) {
-		var disabledClass = '-is-disabled';
+		var disabledClass = '-is-disabled',
+			activeClass = '-is-active';
 
 		if (index >= this.$elements.length) {
 			this.index = 0;
@@ -43,5 +44,10 @@ Wee.fn.make('easySlide', {
 			.removeClass(disabledClass)
 			.siblings()
 			.addClass(disabledClass);
+
+		this.$thumbs.eq(this.index)
+			.addClass(activeClass)
+			.siblings()
+			.removeClass(activeClass);
 	}
 });

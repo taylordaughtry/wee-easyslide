@@ -41,3 +41,26 @@
 		}
 	}
 }
+.thumbnails {
+	&__item {
+		.inline-block(9);
+		.margin(right; 1);
+		.relative();
+		.user-select();
+		&:before {
+			.absolute(0; 0; 0; 0);
+			.background(fade(@primary, 90%));
+			.content();
+			.transition(opacity);
+			.transparent();
+		}
+		&.-is-active {
+			&:before {
+				.opaque();
+			}
+		}
+	}
+	&__image {
+		.block();
+	}
+}
