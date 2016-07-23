@@ -15,6 +15,8 @@ Wee.fn.make('easySlide', {
 
 		if (conf.thumbs) {
 			this.$thumbs = $('ref:' + conf.thumbs);
+			this.thumbOffset = 0;
+			this.thumbMargin = parseInt(this.$thumbs.first().css('margin-right'));
 		}
 
 		this.bind();
@@ -46,10 +48,18 @@ Wee.fn.make('easySlide', {
 			.addClass(disabledClass);
 
 		if (this.$thumbs) {
-			this.$thumbs.eq(this.index)
-				.addClass(activeClass)
+			var $newThumb = this.$thumbs.eq(this.index),
+				parentWidth = $newThumb.parent()[0].getBoundingClientRect().width;
+
+			$newThumb.addClass(activeClass)
 				.siblings()
 				.removeClass(activeClass);
+
+			if ($newThumb[0].offsetLeft > parentWidth / 2) {
+				this.thumbOffset += $newThumb[0].offsetWidth + this.thumbMargin;
+
+				$newThumb.parent().css('left', '-' + this.thumbOffset + 'px');
+			}
 		}
 	}
 });
