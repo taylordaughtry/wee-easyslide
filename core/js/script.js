@@ -26,11 +26,11 @@ Wee.fn.make('easySlide', {
 		$(this.$arrows).on('click', function(e, el) {
 			var index = el.nextSibling === null ? this.index + 1 : this.index - 1;
 
-			this.cycle(index);
+			this.cycle(index, el.nextSibling === null);
 		}.bind(this));
 	},
 
-	cycle: function(index) {
+	cycle: function(index, forward) {
 		if (index >= this.$elements.length) {
 			this.index = 0;
 		} else if (index < 0) {
@@ -42,7 +42,7 @@ Wee.fn.make('easySlide', {
 		this.cycleElements();
 
 		if (this.$thumbs) {
-			this.cycleThumbs();
+			this.cycleThumbs(forward);
 		}
 	},
 
@@ -55,19 +55,20 @@ Wee.fn.make('easySlide', {
 			.addClass(disabledClass);
 	},
 
-	cycleThumbs: function() {
+	cycleThumbs: function(forward) {
 		var activeClass = '-is-active',
-			$newThumb = this.$thumbs.eq(this.index),
-			parentWidth = $newThumb.parent()[0].getBoundingClientRect().width;
+			$thumb = this.$thumbs.eq(this.index),
+			halfOfParent = $thumb.parent()[0].getBoundingClientRect().width / 2,
+			offset = $thumb[0].offsetWidth + this.thumbMargin;
 
-		$newThumb.addClass(activeClass)
+		$thumb.addClass(activeClass)
 			.siblings()
 			.removeClass(activeClass);
 
-		if ($newThumb[0].offsetLeft > parentWidth / 2) {
-			this.thumbOffset += $newThumb[0].offsetWidth + this.thumbMargin;
-
-			$newThumb.parent().css('left', '-' + this.thumbOffset + 'px');
+		if ($thumb[0].offsetLeft > halfOfParent) {
+			forward ? this.thumbOffset += offset : this.thumbOffset -= offset;
 		}
+
+		$thumb.parent().css('left', '-' + this.thumbOffset + 'px');
 	}
 });
