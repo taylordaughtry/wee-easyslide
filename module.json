@@ -1,0 +1,31 @@
+{
+	"name": "easySlide",
+	"version": "1.0.0",
+	"description": "",
+	"homepage": "",
+	"author": "",
+	"autoload": true,
+	"extension": false,
+	"script": {
+		"core": {
+			"enable": true,
+			"namespace": "easySlide",
+			"features": {
+				"animate": true,
+				"assets": true,
+				"chain": true,
+				"data": true,
+				"dom": true,
+				"events": true,
+				"history": true,
+				"routes": true,
+				"screen": true,
+				"touch": true,
+				"view": true
+			}
+		}
+	},
+	"dependencies": {
+		"wee": "^3.0.0"
+	}
+}

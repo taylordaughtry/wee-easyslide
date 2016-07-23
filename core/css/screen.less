@@ -1,0 +1,43 @@
+// easySlide Module
+// Licensed under Apache 2 (http://www.apache.org/licenses/LICENSE-2.0)
+// DO NOT MODIFY
+
+/*------------------------------------*\
+	# General
+\*------------------------------------*/
+
+.gallery {
+	.relative();
+	&__image {
+		.opaque();
+		.transition(opacity);
+		&.-is-disabled {
+			.absolute();
+			.transparent();
+		}
+	}
+	&__arrow {
+		.absolute(50%);
+		.align(center);
+		.background(light; 40%);
+		.cursor();
+		.font-size(3.5; 1);
+		.square(4.2);
+		.translate(y; -50%);
+		&:before {
+			.inline-block();
+			.line-height(4.2rem);
+		}
+		&:first-child {
+			&:before {
+				.content(@iconPrevious; icons);
+			}
+		}
+		&:last-child {
+			.right(0);
+			&:before {
+				.content(@iconNext; icons);
+			}
+		}
+	}
+}
