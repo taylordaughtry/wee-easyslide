@@ -70,5 +70,13 @@ Wee.fn.make('easySlide', {
 		}
 
 		$thumb.parent().css('left', '-' + this.thumbOffset + 'px');
+
+		if (forward && this.index === this.$thumbs.length - 1) {
+			this.thumbOffset = 0;
+		} else if (! forward && this.index === this.$thumbs.length - 1) {
+			this.thumbOffset = (this.$thumbs.length / 2 - 2) * offset;
+
+			$thumb.parent().css('left', '-' + this.thumbOffset + 'px');
+		}
 	}
 });
