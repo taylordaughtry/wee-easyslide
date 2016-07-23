@@ -43,6 +43,13 @@
 	}
 }
 .thumbnails {
+	.spaced-block(1; false; 4.9);
+	.crop();
+	.no-wrap();
+	.relative();
+	&__wrapper {
+		.absolute();
+	}
 	&__item {
 		.inline-block(9);
 		.margin(right; 1);
