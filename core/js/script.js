@@ -31,9 +31,6 @@ Wee.fn.make('easySlide', {
 	},
 
 	cycle: function(index) {
-		var disabledClass = '-is-disabled',
-			activeClass = '-is-active';
-
 		if (index >= this.$elements.length) {
 			this.index = 0;
 		} else if (index < 0) {
@@ -42,24 +39,35 @@ Wee.fn.make('easySlide', {
 			this.index = index;
 		}
 
+		this.cycleElements();
+
+		if (this.$thumbs) {
+			this.cycleThumbs();
+		}
+	},
+
+	cycleElements: function() {
+		var disabledClass = '-is-disabled';
+
 		this.$elements.eq(this.index)
 			.removeClass(disabledClass)
 			.siblings()
 			.addClass(disabledClass);
+	},
 
-		if (this.$thumbs) {
-			var $newThumb = this.$thumbs.eq(this.index),
-				parentWidth = $newThumb.parent()[0].getBoundingClientRect().width;
+	cycleThumbs: function() {
+		var activeClass = '-is-active',
+			$newThumb = this.$thumbs.eq(this.index),
+			parentWidth = $newThumb.parent()[0].getBoundingClientRect().width;
 
-			$newThumb.addClass(activeClass)
-				.siblings()
-				.removeClass(activeClass);
+		$newThumb.addClass(activeClass)
+			.siblings()
+			.removeClass(activeClass);
 
-			if ($newThumb[0].offsetLeft > parentWidth / 2) {
-				this.thumbOffset += $newThumb[0].offsetWidth + this.thumbMargin;
+		if ($newThumb[0].offsetLeft > parentWidth / 2) {
+			this.thumbOffset += $newThumb[0].offsetWidth + this.thumbMargin;
 
-				$newThumb.parent().css('left', '-' + this.thumbOffset + 'px');
-			}
+			$newThumb.parent().css('left', '-' + this.thumbOffset + 'px');
 		}
 	}
 });
