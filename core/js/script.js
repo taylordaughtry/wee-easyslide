@@ -45,9 +45,11 @@ Wee.fn.make('easySlide', {
 			.siblings()
 			.addClass(disabledClass);
 
-		this.$thumbs.eq(this.index)
-			.addClass(activeClass)
-			.siblings()
-			.removeClass(activeClass);
+		if (this.$thumbs) {
+			this.$thumbs.eq(this.index)
+				.addClass(activeClass)
+				.siblings()
+				.removeClass(activeClass);
+		}
 	}
 });
