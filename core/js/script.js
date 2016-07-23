@@ -58,7 +58,7 @@ Wee.fn.make('easySlide', {
 	cycleThumbs: function(forward) {
 		var activeClass = '-is-active',
 			$thumb = this.$thumbs.eq(this.index),
-			halfOfParent = $thumb.parent()[0].getBoundingClientRect().width / 2,
+			halfOfParent = $thumb.parent().parent()[0].getBoundingClientRect().width / 2,
 			offset = $thumb[0].offsetWidth + this.thumbMargin;
 
 		$thumb.addClass(activeClass)
@@ -74,7 +74,7 @@ Wee.fn.make('easySlide', {
 		if (forward && this.index === this.$thumbs.length - 1) {
 			this.thumbOffset = 0;
 		} else if (! forward && this.index === this.$thumbs.length - 1) {
-			this.thumbOffset = (this.$thumbs.length / 2 - 2) * offset;
+			this.thumbOffset = (this.$thumbs.length / 2) * offset;
 
 			$thumb.parent().css('left', '-' + this.thumbOffset + 'px');
 		}
