@@ -2,6 +2,7 @@ Wee.fn.make('easySlide', {
 	init: function(options) {
 		var conf = $.extend({
 				arrows: 'arrow',
+				cycleCallback: false,
 				elementRef: 'galleryImage',
 				enableSwipe: true,
 				resizeParent: false,
@@ -64,6 +65,12 @@ Wee.fn.make('easySlide', {
 
 		if (this.$thumbs) {
 			this.cycleThumbs(forward);
+		}
+
+		if (this.conf.cycleCallback) {
+			this.conf.cycleCallback({
+				index: this.index
+			});
 		}
 	},
 
