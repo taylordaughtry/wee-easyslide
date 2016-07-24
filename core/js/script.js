@@ -12,6 +12,7 @@ Wee.fn.make('easySlide', {
 
 		this.conf = conf;
 		this.$elements = $('ref:' + conf.elementRef);
+		this.$trackers = $('ref:' + conf.trackerRef);
 		this.$arrows = $('ref:' + conf.arrows);
 		this.index = 0;
 
@@ -32,6 +33,10 @@ Wee.fn.make('easySlide', {
 		}.bind(this));
 
 		$(this.$thumbs).on('click', function(e, el) {
+			this.cycle($(el).index());
+		}.bind(this));
+
+		$(this.$trackers).on('click', function(e, el) {
 			this.cycle($(el).index());
 		}.bind(this));
 
