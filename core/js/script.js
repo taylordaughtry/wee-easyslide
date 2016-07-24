@@ -9,6 +9,7 @@ Wee.fn.make('easySlide', {
 				thumbs: false
 			}, options);
 
+		this.conf = conf;
 		this.$elements = $('ref:' + conf.elementRef);
 		this.$arrows = $('ref:' + conf.arrows);
 		this.index = 0;
@@ -33,19 +34,21 @@ Wee.fn.make('easySlide', {
 			this.cycle($(el).index());
 		}.bind(this));
 
-		$.events.on(this.$elements, {
-			swipeRight: function(e, el) {
-				this.cycle(this.index - 1, el.nextSibling === null);
-			},
-			swipeLeft: function(e, el) {
-				this.cycle(this.index + 1, el.nextSibling === null);
-			},
-			dragstart: function(e) {
-				e.preventDefault();
-			}
-		}, {
-			scope: this
-		});
+		if (this.conf.enableSwipe) {
+			$.events.on(this.$elements, {
+				swipeRight: function(e, el) {
+					this.cycle(this.index - 1, el.nextSibling === null);
+				},
+				swipeLeft: function(e, el) {
+					this.cycle(this.index + 1, el.nextSibling === null);
+				},
+				dragstart: function(e) {
+					e.preventDefault();
+				}
+			}, {
+				scope: this
+			});
+		}
 	},
 
 	cycle: function(index, forward) {
