@@ -28,6 +28,10 @@ Wee.fn.make('easySlide', {
 
 			this.cycle(index, el.nextSibling === null);
 		}.bind(this));
+
+		$(this.$thumbs).on('click', function(e, el) {
+			this.cycle($(el).index());
+		}.bind(this));
 	},
 
 	cycle: function(index, forward) {
