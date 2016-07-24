@@ -35,7 +35,6 @@ Wee.fn.make('easySlide', {
 
 		$.events.on(this.$elements, {
 			swipeRight: function(e, el) {
-				console.log('asdf');
 				this.cycle(this.index - 1, el.nextSibling === null);
 			},
 			swipeLeft: function(e, el) {
