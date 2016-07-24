@@ -32,6 +32,21 @@ Wee.fn.make('easySlide', {
 		$(this.$thumbs).on('click', function(e, el) {
 			this.cycle($(el).index());
 		}.bind(this));
+
+		$.events.on(this.$elements, {
+			swipeRight: function(e, el) {
+				console.log('asdf');
+				this.cycle(this.index - 1, el.nextSibling === null);
+			},
+			swipeLeft: function(e, el) {
+				this.cycle(this.index + 1, el.nextSibling === null);
+			},
+			dragstart: function(e) {
+				e.preventDefault();
+			}
+		}, {
+			scope: this
+		});
 	},
 
 	cycle: function(index, forward) {
